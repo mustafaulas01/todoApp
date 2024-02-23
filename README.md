@@ -7,10 +7,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This Project was developed to manage the demands coming to IT.
 
 ## Used Technologies
-*Angular 15.2.10
-*Node 18.10.0
-*Bootstrap 5.2.0
-*Alertify
+* Angular 15.2.10
+* Node 18.10.0
+* Bootstrap 5.2.0
+* Alertify
+* Firebase Database
 
 ## In-program Screenshots
 
