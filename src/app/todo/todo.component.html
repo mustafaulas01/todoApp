@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mx-auto">
+            <h3 class="bg-primary text-white p-3 text-center"> Dogo IT-Yazılım To-Do Listesi </h3>
+            <div class="row">
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input #noForm type="text" class="form-control" placeholder="No">
+                       
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-3">
+                        <input #departmentForm type="text" class="form-control" placeholder="Bölüm">
+                       
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <input [(ngModel)]="description" #descriptionForm type="text" class="form-control" placeholder="Açıklama">
+                       
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-2">
+                        <input #requestDateForm type="text" class="form-control" placeholder="Talep Tarih">
+                       
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-2">
+                        <input #statusForm type="text" class="form-control" placeholder="Durumu">
+                       
+                    </div>
+                </div>
+            </div>
+ <div class="row">
+                <div class="input-group mb-3">
+       
+                <button 
+                 [class.disabled]="description.length==0"
+                
+                class="btn btn-success" 
+                style="width: 100%;" 
+                (click)="addRequest(noForm.value,departmentForm.value,descriptionForm.value,requestDateForm.value,statusForm.value); noForm.value='';departmentForm.value='';descriptionForm.value='';requestDateForm.value='';statusForm.value=''; ">Yeni Ekle</button>
+            </div>
+ </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-check mb-3">
+                        <input   [(ngModel)]="displayAll" [checked]="displayAll" (change)="getItems();displayPlanned=false;displayDegerlendirme=false;displayDevam=false;"   type="checkbox" class="form-check-input" name="" id="displayAll">
+                        <label for="displayAll" class="form-check-label">Hepsini Göster</label>
+                       
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-check mb-3">
+                        <input [(ngModel)]="displayPlanned" [checked]="displayPlanned" (change)="getItems();displayAll=false;displayDegerlendirme=false;displayDevam=false;"  type="checkbox"  class="form-check-input" name="" id="displayPlanned">
+                        <label for="displayPlanned" class="form-check-label">Planlananları Göster</label>
+                       
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-check mb-3">
+                        <input [(ngModel)]="displayDevam" [checked]="displayDevam" type="checkbox" (change)="getItems();displayDegerlendirme=false;displayAll=false;displayPlanned=false;"   class="form-check-input" name="" id="displayDevam">
+                        <label for="displayDevam" class="form-check-label">Devam Edenleri Göster</label>
+                       
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-check mb-3">
+                        <input  [(ngModel)]="displayDegerlendirme" [checked]="displayDegerlendirme" (change)="getItems();displayDevam=false;displayPlanned=false;displayAll=false;"   type="checkbox" class="form-check-input" name="" id="displayDegerlendirme">
+                        <label for="displayDegerlendirme" class="form-check-label">Değerlendirmedekileri Göster</label>
+                       
+                    </div>
+                </div>
+            </div>
+       
+   
+                         
+            <table *ngIf="getItems().length>0" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Bölüm</th>
+                        <th>Talep Açıklaması</th>
+                        <th>Talep Tarihi</th>
+                        <th>Durumu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of getItems()">
+                        <td>{{item.no}}</td>
+                    
+                        <td>{{item.department}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.requestDate}}</td>
+                        <!-- <td> <span [class.text-success]="item.status=='Devam Ediyor'" [class.text-primary]="item.status=='Değerlendirmede'" [class.text-warning]="item.status=='Planlandı'">{{item.status}}</span></td> -->
+                        <td> <span [class]="{'text-success':item.status=='Devam Ediyor','text-primary':item.status=='Değerlendirmede','text-warning':item.status=='Planlandı'}">{{item.status}}</span></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="alert alert-warning" *ngIf="getItems().length<1">Listede İlgili Herhangi bir Talep Bulunamadı</div>
+        </div>
+    </div>
+</div>
